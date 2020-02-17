@@ -8,6 +8,7 @@ class Tree:
 
 
     def insert(self, data):
+        # this inserts into a binary search tree
         if self.data:
             if data < self.data:
                 if self.left is None:
@@ -30,9 +31,22 @@ class Tree:
         if self.right:
             self.right.depthFirst()
 
+    def isBinarySearchTree(self):
+        if self.left:
+            if self.data > self.left.data:
+                self.left.isBinarySearchTree()
+            else:
+                return False
+        if self.right:
+            if self.data < self.right.data:
+                self.right.isBinarySearchTree()
+            else:
+                return False
+        return True
+
 
     def bTreeSearch(self, lkpval):
-        # works for binary trees only
+        # works for binary search trees only
         print "Traversing the node with data : " + str(self.data)
         if lkpval < self.data:
             if self.left is None:
@@ -102,9 +116,26 @@ class Tree:
     def printSortedTree(self):
         if self.left:
             self.left.printSortedTree()
-        print( self.data),
+        print(self.data),
         if self.right:
             self.right.printSortedTree()
+
+    def returnSortedTree(self, arr):
+        if self.left:
+            self.left.returnSortedTree(arr)
+        arr.append(self.data)
+        if self.right:
+            self.right.returnSortedTree(arr)
+
+    def findNextInOrder(self, checkVal):
+        arr = list()
+        self.returnSortedTree(arr) 
+        i = 0
+        while i < len(arr) - 1:
+            if arr[i] == checkVal:
+                return arr[i+1]
+            i += 1
+        return str(checkVal) + " is the highest value in the tree"
 
 
 
@@ -120,6 +151,9 @@ root.insert(4)
 root.insert(15)
 root.insert(16)
 root.insert(17)
+# these lines will break the binary search tree formation
+#extra = Tree(1)
+#root.right = extra
 
 print "Print Sorted Tree"
 root.printSortedTree()
@@ -138,3 +172,18 @@ print "\nIs tree balanced : " + str(root.isTreeBalanced())
 
 print "\n"
 root.drawTree(root)
+
+print "\n"
+print "Is this a binary search tree?"
+if root.isBinarySearchTree():
+    print "Yes"
+else:
+    print "No"
+
+arr = list()
+root.returnSortedTree(arr)
+print "Sorted Tree " + str(arr)
+
+checkVal = 4
+print "Finding next inorder for " + str(checkVal)
+print str(root.findNextInOrder(checkVal))
