@@ -77,7 +77,7 @@ class Tree:
     def height(self, node):
         if node is None:
             return 0
-        else :
+        else:
             # Compute the height of each subtree
             lheight = self.height(node.left)
             rheight = self.height(node.right)
@@ -137,7 +137,28 @@ class Tree:
             i += 1
         return str(checkVal) + " is the highest value in the tree"
 
+### end class code ###
 
+def areIdentical(root1, root2):
+    if root1 is None and root2 is None:
+        return True
+    elif root1 is None or root2 is None:
+        return False
+    else:
+         return (root1.data == root2.data and \
+                areIdentical(root1.left, root2.left) and areIdentical(root1.right, root2.right))
+
+def isSubTree(root, subTree):
+    if subTree is None:
+        return True
+    if root is None:
+        return False 
+
+    if areIdentical(root, subTree):
+        return True
+
+    return isSubTree(root.left, subTree) or isSubTree(root.right, subTree)
+ 
 
 ###################################
 
@@ -187,3 +208,14 @@ print "Sorted Tree " + str(arr)
 checkVal = 4
 print "Finding next inorder for " + str(checkVal)
 print str(root.findNextInOrder(checkVal))
+
+st = Tree(3)
+st.insert(1)
+st.insert(8)
+
+st.drawTree(st)
+
+if isSubTree(root, st):
+    print "Yes - we have a subtree"
+else:
+    print "No - we do not have a subtree"
