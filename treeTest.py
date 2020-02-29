@@ -24,13 +24,6 @@ class Tree:
             self.data = data
 
 
-    def depthFirst(self):
-        print(self.data)
-        if self.left:
-           self.left.depthFirst()
-        if self.right:
-            self.right.depthFirst()
-
     def isBinarySearchTree(self):
         if self.left:
             if self.data > self.left.data:
@@ -45,9 +38,32 @@ class Tree:
         return True
 
 
+    def depthFirst(self, order):
+        if order == 'preorder':
+            print(self.data)
+            if self.left:
+            	self.left.depthFirst(order)
+            if self.right:
+                self.right.depthFirst(order)
+        elif order == 'inorder':
+            if self.left:
+             	self.left.depthFirst(order)
+            print(self.data)
+            if self.right:
+                self.right.depthFirst(order)
+        elif order == 'postorder':
+            if self.left:
+            	self.left.depthFirst(order)
+            if self.right:
+                self.right.depthFirst(order)
+            print(self.data)
+        else:
+                print('Invalid Order')
+
+
     def bTreeSearch(self, lkpval):
         # works for binary search trees only
-        print "Traversing the node with data : " + str(self.data)
+        print("Traversing the node with data : " + str(self.data))
         if lkpval < self.data:
             if self.left is None:
                 return str(lkpval)+" Not Found"
@@ -64,7 +80,6 @@ class Tree:
         # assumes integer data values
         if node == None: 
             return 0
-        print "looking at node with data : " + str(node.data)
         return node.total(node.left) + node.total(node.right) + node.data
 
    
@@ -92,7 +107,7 @@ class Tree:
         h = self.height(root)
         for i in range(1, h+1):
             self.printGivenLevel(root, i)
-            print "\n"
+            print("\n")
 
 
     # Print nodes at a given level
@@ -104,9 +119,9 @@ class Tree:
         if level == 1:
             cnt = 1
             while cnt <= tabMultiplier:
-                print "\t",
+                print("\t",end =" ")
                 cnt += 1
-            print str(root.data),
+            print(str(root.data), end =" ")
         elif level > 1 :
             self.printGivenLevel(root.left , level-1)
             self.printGivenLevel(root.right , level-1)
@@ -114,6 +129,7 @@ class Tree:
 
 
     def printSortedTree(self):
+	# inorder
         if self.left:
             self.left.printSortedTree()
         print(self.data),
@@ -121,6 +137,7 @@ class Tree:
             self.right.printSortedTree()
 
     def returnSortedTree(self, arr):
+	# inorder
         if self.left:
             self.left.returnSortedTree(arr)
         arr.append(self.data)
@@ -176,46 +193,50 @@ root.insert(17)
 #extra = Tree(1)
 #root.right = extra
 
-print "Print Sorted Tree"
+print("Print Sorted Tree")
 root.printSortedTree()
-print "\n"
+print("\n")
 
 ttl = root.total(root)
-print "\nTotal of all node values : " + str(ttl)
+print("\nTotal of all node values : " + str(ttl))
 
-print "\nBF Search"
+print("\nBF Search")
 print(root.bTreeSearch(100000))
 
-print "\nDepth First Search"
-root.depthFirst()
+print("\nDepth First Search in-order")
+root.depthFirst(order='inorder')
+print("\nDepth First Search pre-order")
+root.depthFirst(order='preorder')
+print("\nDepth First Search post-order")
+root.depthFirst(order='postorder')
 
-print "\nIs tree balanced : " + str(root.isTreeBalanced())
+print("\nIs tree balanced : " + str(root.isTreeBalanced()))
 
-print "\n"
+print("\n")
 root.drawTree(root)
 
-print "\n"
-print "Is this a binary search tree?"
+print("\n")
+print("Is this a binary search tree?")
 if root.isBinarySearchTree():
-    print "Yes"
+    print("Yes")
 else:
-    print "No"
+    print("No")
 
 arr = list()
 root.returnSortedTree(arr)
-print "Sorted Tree " + str(arr)
+print("Sorted Tree " + str(arr))
 
 checkVal = 4
-print "Finding next inorder for " + str(checkVal)
-print str(root.findNextInOrder(checkVal))
+print("Finding next inorder for " + str(checkVal))
+print(str(root.findNextInOrder(checkVal)))
 
 st = Tree(3)
 st.insert(1)
-st.insert(8)
+st.insert(4)
 
 st.drawTree(st)
 
 if isSubTree(root, st):
-    print "Yes - we have a subtree"
+    print("Yes - we have a subtree")
 else:
-    print "No - we do not have a subtree"
+    print("No - we do not have a subtree")
