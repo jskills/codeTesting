@@ -6,25 +6,26 @@ class Graph():
         self.graphDict = dict()
 
     def find_all_paths(self, graph, start, end, path=[]):
+	# create a new list. Using path.append(start) would modify the value of path in the caller
         path = path + [start]
         if start == end:
             return [path]
-        if not graph.has_key(start):
+        if not start in graph:
             return []
-        paths = []
+        all_paths = []
         for node in graph[start]:
             if node not in path:
                 newpaths = self.find_all_paths(graph, node, end, path)
                 for newpath in newpaths:
-                    paths.append(newpath)
-        return paths
+                    all_paths.append(newpath)
+        return all_paths
 
 
     def find_shortest_rpath(self, graph, start, end, path=[]):
         path = path + [start]
         if start == end:
             return path
-        if not graph.has_key(start):
+        if not start in graph:
             return None
         shortest = None
         for node in graph[start]:
@@ -41,8 +42,8 @@ class Graph():
         for node in graph:
             for neighbor in graph[node]:
                 edges.append((node, neighbor))
-
         return edges
+
 
     # using deque - faster, but probably not helpful for academic purposes
     def find_shortest_path(self, graph, start, end):
@@ -62,7 +63,7 @@ class Graph():
 g = Graph()
 # note this is a directed graph
 g.graphDict = {'A': ['B', 'C'],
-          'B': ['C', 'D'],
+          'B': ['D'],
           'C': ['D', 'F'],
           'D': ['C'],
           'E': ['F'],
@@ -70,14 +71,14 @@ g.graphDict = {'A': ['B', 'C'],
           'G': ['D']}
 
 
-print "All Edges"
-print g.generateEdges(g.graphDict)
+print("All Edges")
+print(g.generateEdges(g.graphDict))
 
-print "Finding All Paths"
-print g.find_all_paths(g.graphDict, 'A', 'D')
+print("Finding All Paths")
+print(g.find_all_paths(g.graphDict, 'A', 'G'))
 
-print "Shortest Path using recursion"
-print g.find_shortest_rpath(g.graphDict, 'A', 'D')
+print("Shortest Path using recursion")
+print(g.find_shortest_rpath(g.graphDict, 'A', 'G'))
 
 
 

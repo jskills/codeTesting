@@ -58,7 +58,7 @@ class Tree:
                 self.right.depthFirst(order)
             print(self.data)
         else:
-                print('Invalid Order')
+            print('Invalid Order')
 
 
     def bTreeSearch(self, lkpval):
