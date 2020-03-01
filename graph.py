@@ -38,11 +38,14 @@ class Graph():
 
 
     def generateEdges(self, graph):
-        edges = []
+        edges = {}
         for node in graph:
             for neighbor in graph[node]:
-                edges.append((node, neighbor))
-        return edges
+                if node in edges:
+                        edges[node].append(neighbor)
+                else:
+                        edges[node] = [neighbor]
+        return edges	
 
 
     # using deque - faster, but probably not helpful for academic purposes
@@ -56,6 +59,28 @@ class Graph():
                     dist[next] = [dist[at], next]
                     q.append(next)
         return dist.get(end)
+
+
+    def BFSearch(self, node):
+        # use different Dict structure (one entry per edge)
+        newDict = {}
+        newDict = self.generateEdges(self.graphDict)
+        visited = {} 
+        for i in newDict:
+                visited[i] = False
+        queue = []
+        queue.append(node)
+        visited[node] = True
+        while len(queue):
+                node = queue.pop(0)
+                for n in newDict[node]:
+                        if visited[n] == False:
+                                visited[n] = True
+                                queue.append(n)
+                print(node,end=" ")
+        print("\n")
+	
+        
 
 
 ######################################
@@ -80,5 +105,5 @@ print(g.find_all_paths(g.graphDict, 'A', 'G'))
 print("Shortest Path using recursion")
 print(g.find_shortest_rpath(g.graphDict, 'A', 'G'))
 
-
-
+print('BFSearch')
+g.BFSearch('G')
