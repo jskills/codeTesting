@@ -28,6 +28,22 @@ class GraphNode:
         else:
             return
 
+    def findAllPaths(self, start, end, paths=[]):
+        paths = paths + [start.data]
+        if start.data == end.data:
+            return [paths]
+        all_paths = []
+        if len(start.vertexList):
+            for v in start.vertexList:
+                if v.data not in paths:
+                    newpaths = self.findAllPaths(v, end, paths)
+                    for n in newpaths:
+                        all_paths.append(n)
+        return all_paths
+                
+            
+        
+
     
 
 ###############################################
@@ -48,3 +64,4 @@ e.connectVertex(e,f)
 
 b.printGraph(a)
 
+print(str(a.findAllPaths(a, c)))
