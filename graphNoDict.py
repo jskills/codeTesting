@@ -23,6 +23,7 @@ class Graph:
             
 
     def depthFirst(self):
+	# pre-order
         print(self.data)
         if self.left:
            self.left.depthFirst()
