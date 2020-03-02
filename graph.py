@@ -11,7 +11,7 @@ class Graph():
         # Using path.append(start) would modify the value of path in the caller
         path = path + [start]
         if start == end:
-            # of start is the same as end return [path] and end recursion
+            # if start is the same as end return [path] and end recursion
             return [path]
         if not start in graph:
             # if start param does not even exist in the graph return empty list
