@@ -24,10 +24,11 @@ class DictLast():
 
 #####################################
 
+# this exercise asks that the "last()" method always return the most recently accessed key in the Dictionary
+# if the key is deleted, it's the last key that was read or written
+
 d = DictLast()
 d.set('First Name', 'Jim')
-print d.last()
-d.set('Middle Name', 'Andrew')
 print d.last()
 print d.get('First Name')
 print d.last()
