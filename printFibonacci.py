@@ -25,8 +25,8 @@ def printFibSequence(limit, useHash):
     # print the entire list up to limit
     i = 0
     while i <= limit:
-        print "item # " + str(i)
-        print str(printFib(i, useHash))
+        print("item # " + str(i))
+        print(str(printFib(i, useHash)))
         i += 1
 
 ######################
@@ -35,17 +35,17 @@ limit =  35
 
 start_time = time.time()
 #printFibSequence(limit, 0)
-print str(printFib(limit, 0))
+print(str(printFib(limit, 0)))
 end_time = time.time()
 runTime = end_time - start_time
-print "Run time 1 in seconds : " + str(round(runTime,4))
+print("Run time 1 in seconds : " + str(round(runTime,4)))
 
 limit = 1000
 
 start_time2 = time.time()
 #printFibSequence(limit, 1)
-print str(printFib(limit, 1))
+print(str(printFib(limit, 1)))
 end_time2 = time.time()
 runTime2 = end_time2 - start_time2
-print "Run time 2 in seconds : " + str(round(runTime2,4))
+print("Run time 2 in seconds : " + str(round(runTime2,4)))
 
