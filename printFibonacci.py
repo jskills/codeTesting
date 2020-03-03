@@ -12,6 +12,10 @@ def printFib(limit, useHash=0, map=dict()):
     elif limit in map and useHash:
         return map[limit] 
     else:
+        # since we are running this method twice
+        # AND we will be repeating values
+        # it's more efficient to use a hash mapping to store previous results
+        # as to avoid unnecessarily recomputing values we already have from this method
         tmp_val = printFib(limit-1, useHash, map) + printFib(limit-2, useHash, map)
         if useHash:
             map[limit] = tmp_val
