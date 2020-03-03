@@ -15,7 +15,10 @@ class GraphNode:
 
 
 	def connectVertex(self, node, vertexNode):
-		node.vertexList.append(vertexNode)
+        if vertexNode.data not in node.vertexList:
+		    node.vertexList.append(vertexNode)
+        else:
+            return None
 
         
 
