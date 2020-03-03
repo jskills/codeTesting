@@ -1,5 +1,5 @@
 
-class SLinkedList:
+class LinkedList:
     def __init__(self):
         self.headval = None
 
@@ -27,7 +27,6 @@ class SLinkedList:
             else:
                 checkDict[checkNode.dataval] = 1
 
-            #print str(checkNode.dataval) + " has occurences " + str(checkDict[checkNode.dataval])
             checkNode = checkNode.nextval
 
 
@@ -106,13 +105,13 @@ class SLinkedList:
     def listprint(self):
         printval = self.headval
         while printval is not None:
-            print (printval.dataval)
+            print((printval.dataval))
             printval = printval.nextval
 
 
 #######################
 
-sl = SLinkedList()
+sl = LinkedList()
 sl.headval = sl.Node(1)
 sl.listprint()
 sl.appendNode(4)
@@ -133,13 +132,13 @@ sl.appendNode(5)
 sl.appendNode(5)
 sl.appendNode(4)
 sl.appendNode(10)
-print "----------- Initial List ------------"
+print("----------- Initial List ------------")
 sl.listprint()
-print "----------- Removed Dulicates ------------"
+print("----------- Removed Duplicates ------------")
 sl.pruneDupes()
 sl.listprint()
-print "----------- Middle of List ------------"
-print str(sl.findMiddleNode(sl.headval).dataval)
-print "----------- Sorted List ------------"
+print("----------- Middle of List ------------")
+print(str(sl.findMiddleNode(sl.headval).dataval))
+print("----------- Sorted List ------------")
 sl.mergeSort(sl.headval)
 sl.listprint()
