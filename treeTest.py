@@ -133,25 +133,26 @@ class Tree:
 
 
     # Print nodes at a given level
-    def printGivenLevel(self, root , level):
-        if root is None:
-            # if root is None just return to end any recursion
+    # the root level has the highest value
+    def printGivenLevel(self, node , level):
+        if node is None:
+            # if node is None just return to end any recursion
             return
         # get the height of the tree
-        tabMultiplier = self.height(root)
+        tabMultiplier = self.height(node)
         # if we are at level 1 print the value of the node
         if level == 1:
             cnt = 1
             while cnt <= tabMultiplier:
                 print("\t",end =" ")
                 cnt += 1
-            print(str(root.data), end =" ")
+            print(str(node.data), end =" ")
         elif level > 1 :
             # else 
-            # call this method against root.left and one level lower
-            # call this method against root.right and one level lower
-            self.printGivenLevel(root.left , level-1)
-            self.printGivenLevel(root.right , level-1)
+            # call this method against node.left and one level lower
+            # call this method against node.right and one level lower
+            self.printGivenLevel(node.left , level-1)
+            self.printGivenLevel(node.right , level-1)
         
 
 
@@ -236,10 +237,13 @@ print("Print Sorted Tree")
 root.printSortedTree()
 print("\n")
 
+print("Height of Tree : " + str(root.height(root)))
+
+
 ttl = root.total(root)
 print("\nTotal of all node values : " + str(ttl))
 
-print("\nBF Search")
+print("\nBTree Search")
 print(root.bTreeSearch(100000))
 
 print("\nDepth First Search in-order")
