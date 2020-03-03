@@ -13,18 +13,19 @@ def addBinary(n1, n2):
 		limit = len(n2)
 	else:
 		limit = len(n1)
+
 	i = limit - 1
 	sumVal = carry = 0
 	print(n1)
 	print(n2)
 	# addressing each string's array values
-	# iterate over each digit of the strings for each 
+	# iterate over each digit of the strings for each from right to left
 	while (i >= 0 ):
 		# pass each digit value to the addBinDigits method
 		# along with the carry flag
 		# that method returns the result of adding two binary digits and whether to carry 1 or not
 		sumVal, carry = addBinDigits(n1[i], n2[i], carry)
-		# concatente the return value in front of the result string
+		# concatenate the return value in front of the result string
 		result = str(sumVal) + result
 		i -= 1
 	if carry:
