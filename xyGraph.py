@@ -1,0 +1,73 @@
+
+def distanceFromOrigin(x, y):
+    # crude calculation for testing
+    # need to account for diagonal distance
+
+    distance = abs(int(x)) + abs(int(y))
+    
+    return distance
+
+
+def returnLongestDistandCoordinates(aDict):
+    longest = 0
+    for a in aDict:
+        if aDict[a] and aDict[a] > longest:
+            longest = aDict[a]
+            coordinates = a
+    return longest, coordinates
+
+
+def returnDistanceList(coordinateList, limit):
+    # will return the list of coordinates closest to origin
+    # limit is the number of coordinate pairs returned
+
+
+    # initialize distance dictionary
+    distanceDict = dict()
+
+    i = 0
+    while i < len(coordinateList):
+        x,y = coordinateList[i].split(",")
+        d = distanceFromOrigin(x,y)
+
+        # if we have not satisifed the limit of coordinates we need to return yet
+        # just add this pair to the dictionary
+        # otherwise it can only be added if it is less than the longest distance in that dict
+
+        if len(distanceDict) < limit:
+            distanceDict[coordinateList[i]] = d
+        else:
+            longestDist, longestDistVal = returnLongestDistandCoordinates(distanceDict)
+            if d < longestDist:
+                # add this entry and boot the other with the longest distance
+                distanceDict[coordinateList[i]] = d
+                distanceDict[longestDistVal] = None
+        i += 1
+
+    returnList = list()
+    # put coordinates into a list based on dictionary keys that have values
+    for d in distanceDict:
+        if distanceDict[d]:
+            returnList.append(d)
+
+    return returnList
+
+
+
+##########################################
+
+testList = list()
+testList.append('1,0')
+testList.append('2,2')
+testList.append('5,4')
+testList.append('1,2')
+testList.append('3,2')
+testList.append('-2,2')
+testList.append('4,2')
+testList.append('3,3')
+
+k = 3
+returnL = returnDistanceList(testList, k)
+print("Returning the " + str(k) + " closest coordinates to the origin")
+for r in returnL:
+    print(r)
