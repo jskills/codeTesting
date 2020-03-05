@@ -1,11 +1,18 @@
+import math
+import random
 
-def distanceFromOrigin(x, y):
-    # crude calculation for testing
-    # need to account for diagonal distance
+def distanceFromOrigin(x, y, method='crow'):
+    # if method is 'city', calculate hortizonal + vertical (city blocks)
+    # if method is 'crow', calculate diagonal distance (as the crow flies)
 
-    distance = abs(int(x)) + abs(int(y))
-    
-    return distance
+    if method == 'crow':
+        return math.sqrt(int(x)**2 + int(y)**2)
+    elif method == 'city' :
+        return abs(int(x)) + abs(int(y))
+    else:
+        print("Invalid method")
+        return None
+  
 
 
 def returnLongestDistandCoordinates(aDict):
@@ -56,18 +63,18 @@ def returnDistanceList(coordinateList, limit):
 
 ##########################################
 
+# generate a list of 100 points on a 2000 x 2000 grid
 testList = list()
-testList.append('1,0')
-testList.append('2,2')
-testList.append('5,4')
-testList.append('1,2')
-testList.append('3,2')
-testList.append('-2,2')
-testList.append('4,2')
-testList.append('3,3')
+for i in range(1 , 100):
+    x = random.randrange(-1000,1000,2)
+    y = random.randrange(-1000,1000,2)
+    testList.append(str(x) + ',' + str(y))
 
-k = 3
+
+# return the k closest points
+k = 5
 returnL = returnDistanceList(testList, k)
 print("Returning the " + str(k) + " closest coordinates to the origin")
 for r in returnL:
     print(r)
+
